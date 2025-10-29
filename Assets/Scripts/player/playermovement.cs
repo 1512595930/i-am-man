@@ -9,11 +9,12 @@ public class playermovement : MonoBehaviour
     
     [Header("速度")]
     public float moveSpeed=7f;
-    [Header("跳跃高度")]
-    public float jumpForce=7f;
 
-    private float dirX;
+
+    private float dirX = 0f;
+
     private Rigidbody2D rb; // 角色的刚体组件
+
     private SpriteRenderer sprite;//动画翻转
     private Animator anim;//动画设置
     void Awake()
@@ -29,10 +30,7 @@ public class playermovement : MonoBehaviour
         dirX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(dirX *moveSpeed, rb.velocity.y);
         
-        if (Input.GetButtonDown("Jump"))
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        }
+        
         UpdateAnimatorState();
     }
     private void UpdateAnimatorState()
@@ -44,8 +42,9 @@ public class playermovement : MonoBehaviour
         }
         else if(dirX<0f)
         {
-            sprite.flipX = true;//动画X轴翻转
             anim.SetBool("running", true);//运行running动画
+            sprite.flipX = true;//动画X轴翻转
+            
             
         }
         else
