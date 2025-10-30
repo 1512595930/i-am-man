@@ -115,6 +115,20 @@ public class BetterJumpController : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
+    public bool IsJumping()
+    {
+        return !isGrounded && rb.velocity.y > 0;
+    }
+
+    public bool IsFalling()
+    {
+        return !isGrounded && rb.velocity.y < 0;
+    }
+
+    public bool IsGrounded()
+    {
+        return isGrounded;
+    }
     void OnGUI()
     {
         GUIStyle style = new GUIStyle();
