@@ -38,11 +38,16 @@ public class PlayerAnimationController : MonoBehaviour
         if (jumpScript.IsJumping())
         {
             state = MovementState.jumping;
+            // 处理朝向
+            sprite.flipX = movementScript.GetDirectionX() < 0;
         }
         else if (jumpScript.IsFalling())
         {
             state = MovementState.falling;
+            // 处理朝向
+            sprite.flipX = movementScript.GetDirectionX() < 0;
         }
+
         // 处理水平移动状态
         else if (movementScript.GetDirectionX() != 0)
         {

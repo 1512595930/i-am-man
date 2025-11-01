@@ -29,7 +29,10 @@ public class BetterJumpController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentJumpCount = maxJumpCount;//初始化跳跃次数
     }
-
+    public void setcurrentJumpCount()
+    {
+        currentJumpCount++;
+    }
     void Update()
     {
         bool previousGrounded = isGrounded;
