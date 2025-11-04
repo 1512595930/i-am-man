@@ -47,9 +47,6 @@ public class BetterJumpController : MonoBehaviour
             currentJumpCount = maxJumpCount;
             hasExtraJump = false;
         }
-        if (Input.GetButtonDown("Jump"))
-        {
-            // 优先使用基础跳跃次数
             if (Input.GetButtonDown("Jump"))
             {
                 // 在地面上且有跳跃次数
@@ -64,14 +61,8 @@ public class BetterJumpController : MonoBehaviour
                     Jump();
                     currentJumpCount--;
                 }
-                // 在空中没有基础次数但有额外跳跃
-                else if (!isGrounded && hasExtraJump)
-                {
-                    //ExtraJump();
-                    hasExtraJump = false;
-                }
+              
             }
-        }
     }
 
     void FixedUpdate()
