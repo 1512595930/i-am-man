@@ -1,0 +1,30 @@
+/// <summary>
+/// ¿ÕÏÐ×´Ì¬
+/// </summary>
+using UnityEngine;
+public class IdleState : IState
+{
+    public void Enter(PlayerController player)
+    {
+        player.SetAnimationState(0); // Idle¶¯»­
+    }
+
+    public void Update(PlayerController player)
+    {
+        // ×´Ì¬×ª»»Âß¼­
+        if (Mathf.Abs(player.HorizontalInput) > 0.1f)
+        {
+            player.ChangeState(StateType.Run); // ÒÆ¶¯µ½±¼ÅÜ
+        }
+        else if (player.JumpPressed && player.IsGrounded)
+        {
+            player.ChangeState(StateType.Jump); // ÌøÔ¾
+        }
+
+        player.UpdateSpriteOrientation();
+    }
+
+    public void FixedUpdate(PlayerController player) { }
+    public void Exit(PlayerController player) { }
+    public string GetStateName() => "Idle";
+}

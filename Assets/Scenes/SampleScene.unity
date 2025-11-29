@@ -719,7 +719,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2541472731424614497, guid: dd09da784044b8c44a2b74c8521ad44c, type: 3}
       propertyPath: m_Name
-      value: orange (3)
+      value: orange
       objectReference: {fileID: 0}
     - target: {fileID: 7184337409018477253, guid: dd09da784044b8c44a2b74c8521ad44c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1451,12 +1451,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a5802a3f9e6f3f4cbe78aacdc9cd357, type: 3}
+  m_Script: {fileID: 11500000, guid: cd62a8e3254f3f7428d9dfb57f906eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1144442281}
-  smoothSpeed: 8
-  offset: {x: 0, y: 0, z: -10}
+  smoothSpeed: 11
+  offset: {x: 0, y: 0, z: -8}
 --- !u!1 &666138280
 GameObject:
   m_ObjectHideFlags: 0
@@ -49231,12 +49231,10 @@ GameObject:
   - component: {fileID: 1144442281}
   - component: {fileID: 1144442280}
   - component: {fileID: 1144442282}
-  - component: {fileID: 1144442287}
   - component: {fileID: 1144442279}
-  - component: {fileID: 1144442283}
-  - component: {fileID: 1144442284}
   - component: {fileID: 1144442285}
-  - component: {fileID: 1144442286}
+  - component: {fileID: 1144442289}
+  - component: {fileID: 1144442290}
   m_Layer: 0
   m_Name: player blue
   m_TagString: Untagged
@@ -49350,9 +49348,9 @@ Transform:
   m_GameObject: {fileID: 1144442278}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0207, y: -0.0773, z: 0}
-  m_LocalScale: {x: 3.7919016, y: 3.7919016, z: 3.7919016}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0.03, y: -0.17, z: 0}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1344553409}
   m_Father: {fileID: 0}
@@ -49384,41 +49382,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1144442283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144442278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37ccb43327f7dd34cb2f9e59950510c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 7
---- !u!114 &1144442284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144442278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31faceabd15b11f4aad083d01b047489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallMultiplier: 3
-  lowJumpMultiplier: 2.5
-  jumpForce: 7
-  maxJumpCount: 1
-  extraJumpsFromItem: 1
-  groundCheck: {fileID: 1344553409}
-  groundCheckDistance: 0.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!95 &1144442285
 Animator:
   serializedVersion: 5
@@ -49440,7 +49403,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1144442286
+--- !u!114 &1144442289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49449,11 +49412,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1144442278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a6a71b64cbd4094d92ddf491cf203de, type: 3}
+  m_Script: {fileID: 11500000, guid: f993afcd582560047999fb3c8c863416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stateParameter: state
---- !u!114 &1144442287
+--- !u!114 &1144442290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49462,11 +49424,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1144442278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 829bc751717fb934fa2f241883a17fdd, type: 3}
+  m_Script: {fileID: 11500000, guid: 541cb982fea0f3f46aac60a2066de75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orangePrefab: {fileID: 2541472731424614497, guid: dd09da784044b8c44a2b74c8521ad44c, type: 3}
-  RESPAWN_DELAY: 3
+  rb: {fileID: 1144442282}
+  animator: {fileID: 1144442285}
+  groundCheck: {fileID: 1344553409}
+  moveSpeed: 7
+  jumpForce: 7
+  groundCheckRadius: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
+  maxJumpCount: 1
 --- !u!1 &1217168516
 GameObject:
   m_ObjectHideFlags: 0
@@ -49546,6 +49518,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1144442281}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1777227122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1777227124}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1777227124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777227122}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.020699978, y: -0.07730001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1828391260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49556,7 +49559,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2541472731424614497, guid: dd09da784044b8c44a2b74c8521ad44c, type: 3}
       propertyPath: m_Name
-      value: orange (2)
+      value: orange
       objectReference: {fileID: 0}
     - target: {fileID: 7184337409018477253, guid: dd09da784044b8c44a2b74c8521ad44c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -49613,7 +49616,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2541472731424614497, guid: dd09da784044b8c44a2b74c8521ad44c, type: 3}
       propertyPath: m_Name
-      value: orange (1)
+      value: orange
       objectReference: {fileID: 0}
     - target: {fileID: 7184337409018477253, guid: dd09da784044b8c44a2b74c8521ad44c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -49729,3 +49732,4 @@ SceneRoots:
   - {fileID: 289295322}
   - {fileID: 1828391260}
   - {fileID: 64010727}
+  - {fileID: 1777227124}
