@@ -4,8 +4,8 @@
 /// </summary>
 public enum StateType
 {
-    Idle,   // ¿ÕÏĞ
-    Run,    // ±¼ÅÜ
-    Jump,   // ÌøÔ¾
-    Fall    // ÏÂÂä
+    Idle, 
+    Run,  
+    Jump,   
+    Fall
 }

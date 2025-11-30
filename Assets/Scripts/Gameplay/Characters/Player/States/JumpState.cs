@@ -22,7 +22,7 @@ public class JumpState : IState
         stateTimer += Time.deltaTime;
 
         // ‘ –Ìø’÷–“∆∂Ø
-        player.ApplyMovement(player.moveSpeed * 0.6f);
+        player.ApplyMovement(player.moveSpeed);
 
         if (player.Velocity.y < Mathf.Epsilon)
         {

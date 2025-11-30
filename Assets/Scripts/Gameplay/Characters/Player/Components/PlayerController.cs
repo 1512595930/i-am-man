@@ -1,3 +1,5 @@
+using PixelAdventure.Core.Events;
+using PixelAdventure.Core.Events.EventTypes;
 using UnityEngine;
 /// <summary>
 /// 玩家主控制器 - 状态模式的上下文
@@ -19,11 +21,16 @@ public class PlayerController : MonoBehaviour
     [Header("多段跳设置")]
     public int maxJumpCount = 1; // 最大跳跃次数（1=单段跳）
     public bool JumpHeld => Input.GetButton("Jump");
+    [Header("死亡检测")]
+    public float deathYThreshold = -10f; // 死亡Y轴阈值
+    public LayerMask spikeLayerMask;     // 尖刺层掩码
+
     private int currentJumpCount; // 当前剩余跳跃次数
 
     // 状态管理
     private IState _currentState;
     private StateFactory _stateFactory;
+    //精灵
     private SpriteRenderer _sprite;
     // 输入状态
     public float HorizontalInput { get; private set; }
@@ -38,7 +45,7 @@ public class PlayerController : MonoBehaviour
         // 初始化状态机
         _stateFactory = new StateFactory();
         ChangeState(StateType.Idle);
-
+        //初始化精灵 2d刚体
         _sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -48,7 +55,8 @@ public class PlayerController : MonoBehaviour
         // 获取输入
         HorizontalInput = Input.GetAxisRaw("Horizontal");
         JumpPressed = Input.GetButtonDown("Jump");
-
+        // 死亡检测
+        CheckDeathConditions();
         // 地面检测
         IsGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
@@ -84,6 +92,10 @@ public class PlayerController : MonoBehaviour
     {
         animator?.SetInteger("state", stateValue);
     }
+    public void SetAnimationState(string stateValue)
+    {
+        animator?.SetTrigger(stateValue);
+    }
 
     /// <summary>
     /// 应用移动力
@@ -110,5 +122,43 @@ public class PlayerController : MonoBehaviour
         {
             _sprite.flipX = HorizontalInput < 0;
         }
+    }
+    /// <summary>
+    /// 检测死亡条件
+    /// 企业级项目中死亡检测应该放在FixedUpdate或单独的检测系统中
+    /// </summary>
+    private void CheckDeathConditions()
+    {
+        // 检测掉出地图
+        if (transform.position.y < deathYThreshold)
+        {
+            Die(PlayerDeathEventArgs.DeathCause.FallOutOfMap);
+            return;
+        }
+
+        // 检测尖刺碰撞（使用物理检测，性能更好）
+        Collider2D spikeCollider = Physics2D.OverlapCircle(transform.position, 0.5f, spikeLayerMask);
+        if (spikeCollider != null)
+        {
+            Die(PlayerDeathEventArgs.DeathCause.SpikeTrap);
+        }
+    }
+
+    /// <summary>
+    /// 玩家死亡处理
+    /// 分离死亡逻辑和事件触发，便于维护
+    /// </summary>
+    /// <param name="cause">死亡原因</param>
+    private void Die(PlayerDeathEventArgs.DeathCause cause)
+    {
+        Debug.Log($"Player died due to: {cause}");
+
+        // 触发死亡事件
+        EventManager.TriggerPlayerDeath(cause, transform.position);
+
+        // 禁用玩家控制
+        enabled = false;
+        animator?.SetTrigger("Die");
+        // 可以在这里添加死亡动画、音效等
     }
 }
