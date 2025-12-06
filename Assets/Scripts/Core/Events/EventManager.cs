@@ -21,7 +21,7 @@ namespace PixelAdventure.Core.Events
         /// <summary>
         /// 玩家复活事件
         /// </summary>
-        public static event EventHandler OnPlayerRespawn;
+        public static event EventHandler<PlayerRespawnEventArgs> OnPlayerRespawn;
         /// <summary>
         /// 单例实例（线程安全）
         /// 企业级项目需要确保单例的线程安全性
@@ -56,14 +56,15 @@ namespace PixelAdventure.Core.Events
         public static void TriggerPlayerDeath(PlayerDeathEventArgs.DeathCause cause, Vector3 deathPosition)
         {
             var eventArgs = new PlayerDeathEventArgs(cause, deathPosition);
-            OnPlayerDeath?.Invoke(null, eventArgs); // 使用空安全调用操作符
+            OnPlayerDeath?.Invoke(null, eventArgs); // 事件名.Invoke(发送者, 事件参数);
         }
         /// <summary>
         /// 触发玩家复活事件
         /// </summary>
-        public static void TriggerPlayerRespawn()
+        public static void TriggerPlayerRespawn(Vector3 RespawnPosition)
         {
-            OnPlayerRespawn?.Invoke(null, EventArgs.Empty);
+            var eventArgs = new PlayerRespawnEventArgs(RespawnPosition);
+            OnPlayerRespawn?.Invoke(null, eventArgs);
         }
 
         /// <summary>

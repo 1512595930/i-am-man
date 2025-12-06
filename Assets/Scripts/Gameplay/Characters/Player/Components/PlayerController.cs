@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     public LayerMask spikeLayerMask;     // 尖刺层掩码
 
     private int currentJumpCount; // 当前剩余跳跃次数
-
     // 状态管理
     private IState _currentState;
     private StateFactory _stateFactory;
@@ -48,6 +47,7 @@ public class PlayerController : MonoBehaviour
         //初始化精灵 2d刚体
         _sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+
     }
 
     void Update()
@@ -143,7 +143,6 @@ public class PlayerController : MonoBehaviour
             Die(PlayerDeathEventArgs.DeathCause.SpikeTrap);
         }
     }
-
     /// <summary>
     /// 玩家死亡处理
     /// 分离死亡逻辑和事件触发，便于维护
@@ -157,8 +156,7 @@ public class PlayerController : MonoBehaviour
         EventManager.TriggerPlayerDeath(cause, transform.position);
 
         // 禁用玩家控制
-        enabled = false;
-        animator?.SetTrigger("Die");
+
         // 可以在这里添加死亡动画、音效等
     }
 }
