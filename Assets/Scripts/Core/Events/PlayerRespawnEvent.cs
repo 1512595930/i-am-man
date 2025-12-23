@@ -2,11 +2,10 @@ using UnityEngine;
 using PixelAdventure.Core.Events;
 using PixelAdventure.Core.Events.EventTypes;
 
-namespace PixelAdventure.Gameplay.Managers
+namespace PixelAdventure.Gameplay.Event
 {
     /// <summary>
-    /// 游戏管理器 - 另一个观察者示例
-    /// 负责处理玩家死亡时的游戏逻辑
+    /// 玩家重生事件
     /// </summary>
     public class PlayerRespawnEvent : MonoBehaviour
     {

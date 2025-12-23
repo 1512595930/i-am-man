@@ -59,9 +59,9 @@ public class PlayerController : MonoBehaviour
         CheckDeathConditions();
         // 地面检测
         IsGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
         // 更新当前状态
         _currentState?.Update(this);
+        
     }
 
     void FixedUpdate()
@@ -72,7 +72,6 @@ public class PlayerController : MonoBehaviour
     
     /// <summary>
     /// 改变玩家状态
-    /// 【可扩展点】外部系统可以通过此方法强制改变状态
     /// </summary>
     public void ChangeState(StateType newStateType)
     {
@@ -125,7 +124,6 @@ public class PlayerController : MonoBehaviour
     }
     /// <summary>
     /// 检测死亡条件
-    /// 企业级项目中死亡检测应该放在FixedUpdate或单独的检测系统中
     /// </summary>
     private void CheckDeathConditions()
     {
@@ -154,9 +152,25 @@ public class PlayerController : MonoBehaviour
 
         // 触发死亡事件
         EventManager.TriggerPlayerDeath(cause, transform.position);
+    }
 
-        // 禁用玩家控制
-
-        // 可以在这里添加死亡动画、音效等
+    /// <summary>
+    /// 触发器进入 - 检测收集物品
+    /// </summary>
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // 方法1：使用标签判断
+        if (collision.CompareTag("apple"))
+        {
+            Debug.Log("收集到 apple!");
+            EventManager.TriggerPlayerCollectItem(ItemCollectedEventArgs.ItemType.Apple, 1);
+            Destroy(collision.gameObject);
+        }
+        if (collision.CompareTag("orange"))
+        {
+            Debug.Log("收集到 orange!");
+            EventManager.TriggerPlayerCollectItem(ItemCollectedEventArgs.ItemType.Orange, 1);
+            Destroy(collision.gameObject);
+        }
     }
 }

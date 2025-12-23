@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using PixelAdventure.Core.Events.EventTypes;
+using PixelAdventure.Gameplay.Event;
 
 namespace PixelAdventure.Core.Events
 {
@@ -22,6 +23,11 @@ namespace PixelAdventure.Core.Events
         /// 玩家复活事件
         /// </summary>
         public static event EventHandler<PlayerRespawnEventArgs> OnPlayerRespawn;
+        /// <summary>
+        /// 玩家收集物品事件
+        /// </summary>
+        public static event EventHandler<ItemCollectedEventArgs> OnPlayerCollectItem;
+
         /// <summary>
         /// 单例实例（线程安全）
         /// 企业级项目需要确保单例的线程安全性
@@ -66,6 +72,18 @@ namespace PixelAdventure.Core.Events
             var eventArgs = new PlayerRespawnEventArgs(RespawnPosition);
             OnPlayerRespawn?.Invoke(null, eventArgs);
         }
+        /// <summary>
+        /// 触发玩家收集物品
+        /// </summary>
+        /// <param name="itemType"></param>
+        /// <param name="quantity"></param>
+        public static void TriggerPlayerCollectItem(ItemCollectedEventArgs.ItemType itemType, int quantity)
+        {
+            var eventArgs = new ItemCollectedEventArgs(itemType, quantity);
+            OnPlayerCollectItem?.Invoke(null, eventArgs);
+        }
+
+
 
         /// <summary>
         /// 清理事件订阅（防止内存泄漏）
@@ -74,6 +92,8 @@ namespace PixelAdventure.Core.Events
         public static void ClearAllSubscriptions()
         {
             OnPlayerDeath = null;
+            OnPlayerCollectItem = null; 
+            OnPlayerRespawn = null;
         }
         
         private void OnDestroy()
